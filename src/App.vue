@@ -24,7 +24,6 @@ import { Options, Vue } from 'vue-class-component';
 import "bulma/css/bulma.css"
 import "font-awesome/css/font-awesome.min.css"
 export default class App extends Vue {
-
-  	
+    
 }
 </script>
