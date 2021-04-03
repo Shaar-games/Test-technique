@@ -9,4 +9,15 @@ body{
   margin: 0px;
   border: 0px;
 }
+
 </style>
+
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+//import "./assets/css/normalize.css"
+//import "./assets/css/skeleton.css"
+
+import "bulma/css/bulma.css"
+import "font-awesome/css/font-awesome.min.css"
+export default class App extends Vue {}
+</script>

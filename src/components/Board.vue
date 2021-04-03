@@ -1,3 +1,4 @@
+
 <template>
     <div class="board">
         <header>
@@ -22,6 +23,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
+import "../assets/css/normalize.css"
+
 @Options({
   props: {
     msg: String
@@ -33,6 +36,7 @@ export default class Board extends Vue {
 </script>
 
 <style scoped>
+
 .board {
   display: grid;
   grid-template-areas:
