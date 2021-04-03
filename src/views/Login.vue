@@ -4,7 +4,7 @@
 		<div class="flex-center-vertically">
 			<div class="columns is-centered is-vcentered">
 			  <div class="column is-half">
-			    <registerForm/>
+			    <loginForm/>
 			  </div>
 			</div>
 		</div>
@@ -13,15 +13,15 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import registerForm from '@/components/registerForm.vue';
+import loginForm from '@/components/loginForm.vue';
 
 @Options({
   components: {
-    registerForm
+    loginForm
   },
 })
 
-export default class Home extends Vue {
+export default class Login extends Vue {
 
 }
 </script>
@@ -32,6 +32,6 @@ export default class Home extends Vue {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
+  height: 60vh;
 }
 </style>

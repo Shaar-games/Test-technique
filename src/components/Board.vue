@@ -23,7 +23,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
-import "../assets/css/normalize.css"
+
 
 @Options({
   props: {
