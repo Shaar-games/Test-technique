@@ -16,10 +16,10 @@
             </article>
         </div>
     </div>
-    <div class="media-content mt-2">
+    <div class="media-content mt-2 ">
         <div class="field">
             <p class="control">
-                <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                <textarea class="textarea" placeholder="Ajouter un commentaire..."></textarea>
             </p>
         </div>
         <nav class="level">

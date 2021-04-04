@@ -8,7 +8,7 @@
 body{
   margin: 0px;
   border: 0px;
-  background-color: #D6D6D7;
+  background-color: #f0f0f0;
   height: 100vh;
 }
 </style>

@@ -2,8 +2,7 @@
 <template>
     <div class="board">
         <header class="has-background-white">
-            
-			<nav class="breadcrumb is-medium mt-4 ml-2" aria-label="breadcrumbs" >
+			<nav class="breadcrumb is-medium bread ml-2 has-background-white" aria-label="breadcrumbs" >
 				<ul v-if="currentRoute.length > 1">
 					<li v-for="i in currentRoute.length-1" :key="i"><router-link :to="linkFrom(i)" >{{ currentRoute[i] }}</router-link></li>
 				</ul>
@@ -32,6 +31,10 @@
 			<div v-if="currentRoute[1] == 'documentation' && !currentRoute[2]">
 				<Topics @ChangeTopic="ChangeTopicD"></Topics>
 			</div>
+
+			<div v-if="currentRoute[1] == 'documentation' && currentRoute[2]">
+				<Attachements :title="currentRoute[2]" ></Attachements>
+			</div>
 			
         </section>
         <aside>
@@ -50,10 +53,11 @@ import Topics from '@/components/Topics.vue';
 import Chat from '@/components/Chat.vue';
 import GroupChat from '@/components/GroupChat.vue';
 import Footer from '@/components/Footer.vue';
+import Attachements from '@/components/Attachments.vue';
 import router from '../router/index';
 @Options({
   components: {
-    Topics,Chat,Footer,GroupChat
+    Topics,Chat,Footer,GroupChat,Attachements
   },
   watch: {
 	'$route'(to, from) {
@@ -85,9 +89,6 @@ export default class Board extends Vue {
 			const element = this.currentRoute[index];
 			ret = ret + "/" + element
 		}
-
-		console.log( ret , from )
-
 		return ret;
 	}
 
@@ -95,9 +96,11 @@ export default class Board extends Vue {
 
 		this.currentRoute = this.$route.path.split("/")
 
-		console.log( this.currentRoute )
+		for (let index = 0; index < this.currentRoute.length; index++) {
+			this.currentRoute[index] = decodeURI( this.currentRoute[index] );
+		}
 
-		this.$forceUpdate()
+		console.log( this.currentRoute )
 	}
 
 	currentRoute : string[] = []
@@ -106,6 +109,15 @@ export default class Board extends Vue {
 </script>
 
 <style scoped>
+.gridvcenter {
+	align-self:center;
+	align-items:center;
+}
+
+.bread{
+	margin-top: 1%;
+	overflow: hidden;
+}
 
 .pointer{
 	cursor: pointer;
@@ -130,18 +142,18 @@ header,dl,section,aside,footer{
 }
 
 header {
-  border: 1px solid black;
+  
   grid-area: header;
   
 }
 
 dl {
-  border: 1px solid black;
+  
   grid-area: navigation;
 }
 
 section {
-  border: 1px solid black;
+  
   margin: 0px;
   grid-area: section;
   overflow-y: scroll;
@@ -149,12 +161,12 @@ section {
 }
 
 aside {
-  border: 1px solid black;
+  
   grid-area: aside;
 }
 
 footer {
-  border: 1px solid black;
+  
   grid-area: footer;
 }
 

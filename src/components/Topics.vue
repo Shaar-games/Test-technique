@@ -3,9 +3,9 @@
 <template>
 	<div class="flex">
 		<div v-for="(v,k) in topics" :key="k" >
-			<div class="card-box" @click="ChangeTopic(k)">
+			<div class="card-box pointer" @click="ChangeTopic(k)">
 				<img :src="v.img" :alt="k">
-				<div class="info">
+				<div class="info has-background-primary">
 					<p class="card-name">{{ k }}</p>
 				</div>
 			</div>
@@ -47,6 +47,10 @@ export default class Topics extends Vue {
 
 <style scoped>
 
+.pointer{
+	cursor: pointer;
+}
+
 @media (min-width: 1000px) {
 	.flex{
 		display: flex !important;
@@ -59,14 +63,13 @@ export default class Topics extends Vue {
 
 .card-box {
   float: left;
-  width: 280px;
+  width: 20vw;
   padding: 12px;
   border-radius: 0px;
   overflow: hidden;
 }
 
 .info {
-  background: #3c3b3d;
   float: left;
   width: 100%;
   padding: 20px 20px 15px 20px;
