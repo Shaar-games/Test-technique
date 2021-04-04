@@ -1,8 +1,8 @@
 
 
 <template>
-	<div>
-		<div v-for="(v,k) in topics" :key="k">
+	<div class="flex">
+		<div v-for="(v,k) in topics" :key="k" >
 			<div class="card-box" @click="ChangeTopic(k)">
 				<img :src="v.img" :alt="k">
 				<div class="info">
@@ -16,34 +16,46 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
+//const administration_png = require('../assets/img/administration.png')
+//const ecole_png = require('../assets/img/ecole.png')
+//const bibliotheque_png = require('../assets/img/bibliotheque.jpg')
 
-const sportimg = require('../assets/img/sport.png')
-const geographieimg = require('../assets/img/geographie.png')
-const artimg = require('../assets/img/art.png')
 export default class Topics extends Vue {
 
-	//topics = ["sport", "géographie", "art","sport", "géographie", "art","sport", "géographie", "art"]
+	//administration, école,bibliothèque
 	ChangeTopic(name : string){
 		console.log( name )
 		this.$emit('ChangeTopic' , name )
 	}
 
 	topics = {
-		"sport":{
-			img : sportimg
+		"administration":{
+			img : require('../assets/img/administration.png')
 		},
-		"géographie":{
-			img : geographieimg
+		"école":{
+			img : require('../assets/img/ecole.png')
 		},
-		"art":{
-			img : artimg
+		"bibliothèque":{
+			img : require('../assets/img/bibliotheque.jpg')
 		},
+		
 	}
+
 }
 </script>
 
 
 <style scoped>
+
+@media (min-width: 1000px) {
+	.flex{
+		display: flex !important;
+		justify-content: center !important;
+	}
+}
+.flex{
+	display: block;
+}
 
 .card-box {
   float: left;

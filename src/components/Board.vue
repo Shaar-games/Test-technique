@@ -22,13 +22,16 @@
         </dl>
         <section>
 			<div v-if="currentRoute[1] == 'messagerie' && !currentRoute[2]">
-				<Topics @ChangeTopic="ChangeTopic"></Topics>
+				<GroupChat @ChangeTopic="ChangeTopicM"></GroupChat>
 			</div>
 
 			<div v-if="currentRoute[1] == 'messagerie' && currentRoute[2]">
 				<Chat></Chat>
 			</div>
-			<!--<Topics @ChangeTopic="ChangeTopic"></Topics>-->
+
+			<div v-if="currentRoute[1] == 'documentation' && !currentRoute[2]">
+				<Topics @ChangeTopic="ChangeTopicD"></Topics>
+			</div>
 			
         </section>
         <aside>
@@ -45,11 +48,12 @@
 import { Options, Vue } from 'vue-class-component';
 import Topics from '@/components/Topics.vue';
 import Chat from '@/components/Chat.vue';
+import GroupChat from '@/components/GroupChat.vue';
 import Footer from '@/components/Footer.vue';
 import router from '../router/index';
 @Options({
   components: {
-    Topics,Chat,Footer
+    Topics,Chat,Footer,GroupChat
   },
   watch: {
 	'$route'(to, from) {
@@ -59,13 +63,16 @@ import router from '../router/index';
 })
 export default class Board extends Vue {
 
-	ChangeTopic( name : string ){
+	ChangeTopicM( name : string ){
 		router.push( "/messagerie/" + name )
+	}
+
+	ChangeTopicD( name : string ){
+		router.push( "/documentation/" + name )
 	}
 
 	Push( path:string){
 		router.push( path )
-		//this.updatedPath()
 	}
 
 	mounted(){
@@ -99,21 +106,6 @@ export default class Board extends Vue {
 </script>
 
 <style scoped>
-
-.hero.has-background {
-  position: relative;
-  overflow: hidden;
-}
-.hero-background {
-  position: absolute;
-  object-fit: contain;
-  object-position: left center;
-  width: 100%;
-  height: 100%;
-}
-.hero-background.is-transparent {
-  opacity: 0.3;
-}
 
 .pointer{
 	cursor: pointer;
