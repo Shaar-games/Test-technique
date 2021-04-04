@@ -13,8 +13,8 @@ import router from '../router/index';
   },
 })
 export default class Home extends Vue {
-  beforeCreate(){
-	    router.push("/signup")
+  	beforeCreate(){
+	    //router.push("/signup")
 	}
 }
 </script>
