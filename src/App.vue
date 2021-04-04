@@ -1,6 +1,8 @@
 
 <template>
-<router-view/>
+<transition name="fade">
+  <router-view/>
+</transition>
 </template>
 
 <style>
@@ -11,7 +13,6 @@ body{
   background-color: #D6D6D7;
   height: 100vh;
 }
-
 </style>
 
 <script lang="ts">

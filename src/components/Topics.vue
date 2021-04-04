@@ -15,9 +15,11 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import sportimg from '../assets/img/sport.png'
-import geographieimg from '../assets/img/geographie.png'
-import artimg from '../assets/img/art.png'
+
+
+const sportimg = require('../assets/img/sport.png')
+const geographieimg = require('../assets/img/geographie.png')
+const artimg = require('../assets/img/art.png')
 export default class Topics extends Vue {
 
 	//topics = ["sport", "géographie", "art","sport", "géographie", "art","sport", "géographie", "art"]

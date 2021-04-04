@@ -3,24 +3,33 @@
     <div class="board">
         <header class="has-background-white">
             
-			<nav class="breadcrumb is-medium mt-4 ml-2" aria-label="breadcrumbs">
-				<ul>
-					<li><a href="#">Documentation</a></li>
-					<li class="is-active"><a href="#" aria-current="page">Sport</a></li>
+			<nav class="breadcrumb is-medium mt-4 ml-2" aria-label="breadcrumbs" >
+				<ul v-if="currentRoute.length > 1">
+					<li v-for="i in currentRoute.length-1" :key="i"><router-link :to="linkFrom(i)" >{{ currentRoute[i] }}</router-link></li>
 				</ul>
 			</nav>
         </header>
-        <navigation>
-            <div class="notification is-primary pointer mb-1 mt-1">
-			  	<div class="title has-text-centered is-5 has-text-white">Messagerie</div>
+        <dl>
+
+			<div :class="{ 'has-background-primary': currentRoute[1] == 'messagerie' , 'has-background-white': currentRoute[1] != 'messagerie' , 'p-3 mb-1 pointer' : true }" @click="Push('/messagerie')">
+				<div :class="{'title has-text-centered is-5' : true , 'has-text-white' : currentRoute[1] == 'messagerie' , 'has-text-black' : currentRoute[1] != 'messagerie'}">Messagerie</div>
 			</div>
-			<div class="notification is-primary pointer mb-1">
-			  	<div class="title has-text-centered is-5 has-text-white">Documentation</div>
+
+			<div :class="{ 'has-background-primary': currentRoute[1] == 'documentation' , 'has-background-white': currentRoute[1] != 'documentation' , 'p-3 mb-1 pointer' : true }"  @click="Push('/documentation')">
+				<div :class="{'title has-text-centered is-5' : true , 'has-text-white' : currentRoute[1] == 'documentation'}">Documentation</div>
 			</div>
-        </navigation>
+
+        </dl>
         <section>
+			<div v-if="currentRoute[1] == 'messagerie' && !currentRoute[2]">
+				<Topics @ChangeTopic="ChangeTopic"></Topics>
+			</div>
+
+			<div v-if="currentRoute[1] == 'messagerie' && currentRoute[2]">
+				<Chat></Chat>
+			</div>
 			<!--<Topics @ChangeTopic="ChangeTopic"></Topics>-->
-			<Chat></Chat>
+			
         </section>
         <aside>
             
@@ -37,17 +46,54 @@ import { Options, Vue } from 'vue-class-component';
 import Topics from '@/components/Topics.vue';
 import Chat from '@/components/Chat.vue';
 import Footer from '@/components/Footer.vue';
-
+import router from '../router/index';
 @Options({
   components: {
     Topics,Chat,Footer
+  },
+  watch: {
+	'$route'(to, from) {
+		this.updatedPath()
+  	}
   },
 })
 export default class Board extends Vue {
 
 	ChangeTopic( name : string ){
-		console.log( "receive emit" , name )
+		router.push( "/messagerie/" + name )
 	}
+
+	Push( path:string){
+		router.push( path )
+		//this.updatedPath()
+	}
+
+	mounted(){
+		this.updatedPath()
+	}
+
+	linkFrom(from:number){
+		let ret = ""
+		for (let index = 1; index < from+1; index++) {
+			const element = this.currentRoute[index];
+			ret = ret + "/" + element
+		}
+
+		console.log( ret , from )
+
+		return ret;
+	}
+
+	updatedPath(){
+
+		this.currentRoute = this.$route.path.split("/")
+
+		console.log( this.currentRoute )
+
+		this.$forceUpdate()
+	}
+
+	currentRoute : string[] = []
 
 }
 </script>
@@ -87,7 +133,7 @@ export default class Board extends Vue {
   margin: 0px;
 }
 
-header,navigation,section,aside,footer{
+header,dl,section,aside,footer{
 	padding: 0.2rem;
 }
 
@@ -97,7 +143,7 @@ header {
   
 }
 
-navigation {
+dl {
   border: 1px solid black;
   grid-area: navigation;
 }
