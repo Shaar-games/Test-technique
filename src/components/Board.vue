@@ -127,7 +127,7 @@ export default class Board extends Vue {
   display: grid;
   grid-template-areas:
     "header header header"
-    "navigation section aside"
+    "dl section aside"
     "footer footer footer";
   grid-template-rows: 8% 1fr 8%;
   grid-template-columns: 15% 1fr 15%;
@@ -149,7 +149,7 @@ header {
 
 dl {
   
-  grid-area: navigation;
+  grid-area: dl;
 }
 
 section {
